@@ -146,6 +146,21 @@ diff = HashDiff.diff(a, b, :comparison => { :numeric_tolerance => 0.1, :case_ins
 diff.should == [["~", "x", 5, 6]]
 ```
 
+
+#### `:show_common`
+
+Also display matching items in the compared objects. Shows every similar key rather than matching arrays or hashes.
+
+```ruby
+a = {c:'car', d:['boat', 'plane'] }
+b = {c:'car', d:['boat', 'plane', 'car'] }
+
+diff = HashDiff.diff(a, b, show_common: true)
+diff.should == [["=", "c", "car"], ["=", "d[0]", "boat"], ["=", "d[1]", "plane"], ["+", "d[2]", "skates"]]
+```
+
+
+
 #### Specifying a custom comparison method
 
 It's possible to specify how the values of a key should be compared.

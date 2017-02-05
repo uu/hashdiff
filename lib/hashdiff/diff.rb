@@ -153,7 +153,14 @@ module HashDiff
         end
       end
     else
-      return [] if compare_values(obj1, obj2, opts)
+	  #return [] if compare_values(obj1, obj2, opts)
+      if compare_values(obj1, obj2, opts)
+        if opts[:show_common] && !(opts[:prefix] =~ /[*]/)
+          return [['=', opts[:prefix], obj1]]
+        else
+          return []
+        end
+      end
       return [['~', opts[:prefix], obj1, obj2]]
     end
 
